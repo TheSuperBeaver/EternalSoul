@@ -11,15 +11,15 @@ export class MainMenu extends Scene {
 
     create() {
 
-        this.add.image(540, 1200, 'background').setScale(2.0);
+        this.add.image(512, 385, 'background').setScale(1.0, 2.0);
 
         const grass = this.add.layer();
 
-        const trees = ['Spruce-1', 'Spruce-2', 'Spruce-3', 'Spruce-5', 'Spruce-6', 'Flower_1', 'Flower_2', 'Flower_3', 'Flower_4', 'Tree-1', 'Tree-2', 'Tree-3', 'Wood-2', 'Bush-1', 'Bush-3'];
+        const trees = ['Spruce-1', 'Spruce-2', 'Spruce-3', 'Spruce-5', 'Spruce-6', 'Flower_1', 'Flower_2', 'Tree-1', 'Tree-2', 'Tree-3', 'Wood-2', 'Bush-1', 'Bush-3'];
 
-        for (let i = 0; i < 128; i++) {
-            let x = Phaser.Math.Between(0, 1080);
-            let y = Phaser.Math.Between(100, 4800);
+        for (let i = 0; i < 64; i++) {
+            let x = Phaser.Math.Between(0, 1024);
+            let y = Phaser.Math.Between(100, 768 * 2);
 
             let frame = Phaser.Utils.Array.GetRandom(trees);
 
@@ -37,21 +37,25 @@ export class MainMenu extends Scene {
 
         this.tweens.add({
             targets: camera,
-            scrollY: 1000,
-            duration: 20000,
+            scrollY: 400,
+            duration: 10000,
             yoyo: true,
             loop: -1
         });
 
-        const uiCamera = this.cameras.add(0, 0, 1080, 2400);
+        const uiCamera = this.cameras.add(0, 0, 1024, 768);
         uiCamera.ignore(this.children.list);
-        const logo = this.add.image(540, 1000, 'logo').setScrollFactor(0).setOrigin(0.5, 0);
+        const logo = this.add.image(512, 0, 'logo').setScrollFactor(0).setOrigin(0.5, 0).setScale(0.75);
 
         uiCamera.ignore([]);
         uiCamera.startFollow(logo, false, 0, 0);
 
         this.input.once('pointerdown', () => {
-            this.scene.start('Game');
+            camera.once('camerafadeoutcomplete', () => {
+                this.scene.start('Story');
+            });
+            camera.fade(2500, 0, 0, 0);
+            uiCamera.fade(1000, 0, 0, 0);
         });
     }
 }
