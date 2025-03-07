@@ -1,0 +1,56 @@
+{
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.pack.core.AssetPack",
+        "version": "2.0.0"
+    },
+    "data": {
+        "items": [
+            {
+                "type": "image",
+                "key": "clouds",
+                "url": "assets/images/clouds.png"
+            },
+            {
+                "type": "image",
+                "key": "joystick",
+                "url": "assets/images/joystick.png"
+            },
+            {
+                "type": "image",
+                "key": "joystick_bg",
+                "url": "assets/images/joystick_bg.png"
+            },
+            {
+                "type": "spritesheet",
+                "key": "character",
+                "url": "assets/sprites/sprites.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 48
+                }
+            },
+            {
+                "type": "tilemapTiledJSON",
+                "key": "witch_hut",
+                "url": "assets/tilemaps/witch_hut.json"
+            },
+            {
+                "type": "image",
+                "key": "forest_tileset",
+                "url": "assets/tilesets/forest_tileset.png"
+            },
+            {
+                "type": "image",
+                "key": "chalet_tileset",
+                "url": "assets/tilesets/chalet_tileset.png"
+            },
+            {
+                "type": "image",
+                "key": "treetrunk_tileset",
+                "url": "assets/tilesets/treetrunk_tileset.png"
+            }
+        ]
+    }
+}

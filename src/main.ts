@@ -1,5 +1,5 @@
 import { Boot } from './scenes/Boot';
-import { Chapter1 as MainGame } from './scenes/Chapter1';
+import { MainGame } from './scenes/MainGame';
 import { GameOver } from './scenes/GameOver';
 import { MainMenu } from './scenes/MainMenu';
 import { Preloader } from './scenes/Preloader';
@@ -26,7 +26,17 @@ const config: Types.Core.GameConfig = {
         Story,
         MainGame,
         GameOver
-    ]
+    ],
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: {
+                y: 0,
+                x: 0
+            },
+            debug: true
+        }
+    },
 };
 
 export default new Game(config);

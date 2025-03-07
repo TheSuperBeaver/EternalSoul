@@ -37,11 +37,10 @@ export class Story extends Scene {
     private moveGrimoire() {
         this.tweens.add({
             targets: this.grimoire,
-            y: 384 + 20,
             duration: 250,
             yoyo: true,
             repeat: 1,
-            ease: 'Sine.easeInOut',
+            ease: 'Expo.easeIn',
             onComplete: () => {
                 this.tweens.add({
                     targets: this.grimoire,
@@ -91,7 +90,7 @@ export class Story extends Scene {
         const buttonImage = this.add.image(0, 0, 'button').setAlpha(0);
         const buttonText = this.add.text(0, 0, 'Continuer', { fontFamily: 'Gabriola', fontSize: '28px', color: '#ffffff' }).setOrigin(0.5);
 
-        const buttonContainer = this.add.container(512, 650, [buttonImage, buttonText]);
+        this.add.container(512, 650, [buttonImage, buttonText]);
 
         // Fade in the button
         this.tweens.add({
@@ -118,7 +117,7 @@ export class Story extends Scene {
         buttonImage.on('pointerup', () => {
             buttonImage.setTexture('button');
             this.camera.fadeOut(500, 0, 0, 0).once('camerafadeoutcomplete', () => {
-                this.scene.start('Chapter1');
+                this.scene.start('MainGame');
             });
         });
     }

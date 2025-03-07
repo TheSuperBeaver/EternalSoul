@@ -1,0 +1,11 @@
+{
+    "settings": {
+        "phasereditor2d.scene.enablePixelArt": true,
+        "phasereditor2d.packager.assetPacks": [
+            {
+                "type": "AssetPack",
+                "url": "assets/asset-pack.json"
+            }
+        ]
+    }
+}

@@ -37,7 +37,7 @@ export class MainMenu extends Scene {
 
         this.tweens.add({
             targets: camera,
-            scrollY: 400,
+            scrollY: 350,
             duration: 10000,
             yoyo: true,
             loop: -1
@@ -47,6 +47,23 @@ export class MainMenu extends Scene {
         uiCamera.ignore(this.children.list);
         const logo = this.add.image(512, 0, 'logo').setScrollFactor(0).setOrigin(0.5, 0).setScale(0.75);
 
+        const fx1 = logo.postFX.addGlow(0xb056ac, 5, 0, false, 0.1, 32);
+        const fx2 = logo.postFX.addGlow(0xffffff, 1, 0, false, 0.1, 5);
+
+        this.tweens.add({
+            targets: fx1,
+            outerStrength: 3,
+            yoyo: true,
+            loop: -1,
+            ease: 'sine.inout'
+        });
+        this.tweens.add({
+            targets: fx2,
+            outerStrength: 2,
+            yoyo: true,
+            loop: -1,
+            ease: 'sine.out'
+        });
         uiCamera.ignore([]);
         uiCamera.startFollow(logo, false, 0, 0);
 

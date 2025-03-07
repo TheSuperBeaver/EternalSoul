@@ -1,6 +1,8 @@
 import { Scene } from 'phaser';
 
 export class Preloader extends Scene {
+    private assetTextMap: { [key: string]: string } = {};
+
     constructor() {
         super('Preloader');
     }
@@ -12,31 +14,10 @@ export class Preloader extends Scene {
         const bar = this.add.rectangle(512 - 230, 380, 4, 28, 0xffffff);
         const loadingText = this.add.text(512, 330, 'Chargement ...', { fontSize: '30px', color: '#ffffff', fontFamily: 'Arial Black' }).setOrigin(0.5);
 
-        const assetTextMap: { [key: string]: string } = {
-            'forest': 'Chargement  forêt',
-            'grass': 'Chargement  herbe',
-            'logo': 'Chargement  logo',
-            'star': 'Chargement étoile',
-            'grimoire': 'Chargement  grimoire',
-            'grimoire_open': 'Chargement  grimoire',
-            'rexvirtualjoystickplugin': 'Chargement  joystick',
-            'story': 'Chargement textes',
-            'character': 'Chargement  character',
-            'button': 'Chargement boutons',
-            'button_down': 'Chargement boutons',
-            'button_highlight': 'Chargement boutons',
-            'joystick': 'Chargement boutons',
-            'joystick_bg': 'Chargement boutons',
-            'clouds': 'Chargement décor',
-            'fog': 'Chargement décor',
-            'witch_hut': 'Chargement décor'
-        };
-
         this.load.on('fileprogress', (file: Phaser.Loader.File) => {
-            const displayText = assetTextMap[file.key] || `Chargement : ${file.key}`;
+            const displayText = this.assetTextMap[file.key] || `Chargement : ${file.key}`;
             loadingText.setText(displayText);
         });
-
 
         this.load.on('progress', (progress: number) => {
             bar.width = 4 + (460 * progress);
@@ -48,45 +29,51 @@ export class Preloader extends Scene {
     }
 
     preload() {
-        //  Load the assets for the game - Replace with your own assets
-        this.load.setPath('assets');
-        this.load.atlas('forest', 'sprites/glade.png', 'sprites/glade.json');
-        this.load.spritesheet('main_char_idle', 'characters/main/idle.png', { frameWidth: 64, frameHeight: 64 });
-        this.load.spritesheet('main_char_walk', 'characters/main/walk.png', { frameWidth: 64, frameHeight: 64 });
-
-        this.load.image('grass', 'background/grass.jpg');
-
-        this.load.image('logo', 'images/logo.png');
-        this.load.image('grimoire', 'images/grimoire.png');
-        this.load.image('grimoire_open', 'images/grimoire_open.png');
-        this.load.image('clouds', 'images/clouds.png');
-        this.load.image('fog', 'images/fog.png')
-        this.load.image('star', 'images/star.png');
-
-        this.load.image('forest_tileset', 'tiles/forest.png');
-        this.load.image('chalet_tileset', 'tiles/chalet_bois.png');
-        this.load.image('treetrunk_tileset', 'tiles/treetrunk_tileset.png');
-
-        this.load.tilemapTiledJSON('witch_hut', 'maps/witch_hut.json');
-
-        this.load.image('button', 'buttons/button_fantasy1.png');
-        this.load.image('button_down', 'buttons/button_fantasy1d.png');
-        this.load.image('button_highlight', 'buttons/button_fantasy1h.png');
-        this.load.image('joystick_bg', 'buttons/joystick_bg.png');
-        this.load.image('joystick', 'buttons/joystick.png');
-
-        this.load.json('story', 'texts/story.json');
-
-        this.load.plugin('rexvirtualjoystickplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js', true);
-
-
+        // Load the assets JSON file
+        this.load.json('assets', 'assets/assets.json');
     }
 
     create() {
-        //  When all the assets have loaded, it's often worth creating global objects here that the rest of the game can use.
-        //  For example, you can define global animations here, so we can use them in other scenes.
+        // Get the assets data from the loaded JSON file
+        const assets = this.cache.json.get('assets').assets;
 
-        //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
-        this.scene.start('MainMenu');
+        // Initialize the assetTextMap
+        assets.forEach((asset: { key: string, type: string, path: string, text?: string, data?: any, frameWidth?: number, frameHeight?: number }) => {
+            this.assetTextMap[asset.key] = asset.text || 'Default';
+
+            switch (asset.type) {
+                case 'atlas':
+                    this.load.atlas(asset.key, asset.path, asset.data);
+                    break;
+                case 'spritesheet':
+                    this.load.spritesheet(asset.key, asset.path, { frameWidth: asset.frameWidth ?? 32, frameHeight: asset.frameHeight ?? 32 });
+                    break;
+                case 'image':
+                    this.load.image(asset.key, asset.path);
+                    break;
+                case 'tilemapTiledJSON':
+                    this.load.tilemapTiledJSON(asset.key, asset.path);
+                    break;
+                case 'json':
+                    this.load.json(asset.key, asset.path);
+                    break;
+                case 'plugin':
+                    this.load.plugin(asset.key, asset.path, true);
+                    break;
+                default:
+                    console.warn(`Unknown asset type: ${asset.type}`);
+            }
+        });
+
+        // Start loading the assets
+        this.load.start();
+
+        // When all the assets have loaded, it's often worth creating global objects here that the rest of the game can use.
+        // For example, you can define global animations here, so we can use them in other scenes.
+
+        // Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
+        this.load.on('complete', () => {
+            this.scene.start('MainMenu');
+        });
     }
 }
