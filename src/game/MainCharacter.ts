@@ -8,11 +8,13 @@ export class MainCharacter extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, 'main_char_idle', 3);
         scene.add.existing(this);
         scene.physics.add.existing(this);
+        this.setName('mainCharacter');
         this.setCollideWorldBounds(true);
         this.setScale(1);
-        this.setDepth(15);
+        this.setDepth(1);
         this.speed = speed;
         this.controls = joystick;
+        this.body?.setCircle(16, this.width / 2 - 16, this.height - 32);
 
         scene.anims.create({
             key: 'left',

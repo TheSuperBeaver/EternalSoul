@@ -34,9 +34,9 @@ const config: Types.Core.GameConfig = {
                 y: 0,
                 x: 0
             },
-            debug: true
+            debug: false
         }
-    },
+    }
 };
 
 export default new Game(config);

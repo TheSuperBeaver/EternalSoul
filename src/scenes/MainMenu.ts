@@ -33,6 +33,7 @@ export class MainMenu extends Scene {
 
         const camera = this.cameras.main;
 
+        camera.postFX.addVignette(0.5, 0.5, 0.9, 0.2);
         camera.postFX.addTiltShift(0.5, 2.0, 0.4);
 
         this.tweens.add({

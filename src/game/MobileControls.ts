@@ -34,4 +34,14 @@ export class MobileControls {
 
         this.cursorKeys = this.joystick.createCursorKeys();
     }
+
+    setButtonAction(action: () => void): void {
+        this.button.setTexture("button_green");
+        this.buttonAction = action;
+    }
+
+    resetButtonAction(): void {
+        this.button.setTexture("button_empty");
+        this.buttonAction = () => { };
+    }
 }
