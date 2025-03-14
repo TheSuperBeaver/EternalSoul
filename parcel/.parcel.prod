@@ -10,7 +10,7 @@
         "...",
         "parcel-reporter-clean-dist",
         "parcel-reporter-static-files-copy",
-        "@parcel/reporter-cli"
+        "@parcel/reporter-cli",
         "./rewrite-relativepath.js"
     ],
     "optimizers": {
