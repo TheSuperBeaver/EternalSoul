@@ -29,7 +29,10 @@
         "parcel-reporter-clean-dist": "^1.0.4",
         "parcel-reporter-static-files-copy": "^1.5.3",
         "process": "^0.11.10",
-        "typescript": "^5.4.5"
+        "typescript": "^5.4.5",
+        "@parcel/bundler-default": "^2.12.0",
+        "@parcel/transformer-babel": "^2.12.0",
+        "@parcel/config-default": "^2.12.0"
     },
     "dependencies": {
         "math-intrinsics": "^1.1.0",

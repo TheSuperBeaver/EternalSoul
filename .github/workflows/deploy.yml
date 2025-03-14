@@ -28,12 +28,12 @@ jobs:
         run: npm install
 
       - name: Build Project
-        run: npm run build
+        run: npm run build-nolog
 
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist  # Make sure this matches your output folder
+          path: dist
 
   deploy:
     needs: build-and-deploy

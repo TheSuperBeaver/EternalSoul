@@ -3,14 +3,18 @@
         "@parcel/config-default"
     ],
     "transformers": {
-        "*.{ts}": [
-            "@parcel/transformer-typescript-tsc"
-        ]
+        "*.ts": ["@parcel/transformer-typescript-tsc"],
+        "*.tsx": ["@parcel/transformer-typescript-tsc"]
     },
     "reporters": [
         "...",
         "parcel-reporter-clean-dist",
         "parcel-reporter-static-files-copy",
+        "@parcel/reporter-cli"
         "./rewrite-relativepath.js"
-    ]
+    ],
+    "optimizers": {
+        "*.js": ["@parcel/optimizer-terser"]
+    },
+    "namers": ["@parcel/namer-default"]
 }
