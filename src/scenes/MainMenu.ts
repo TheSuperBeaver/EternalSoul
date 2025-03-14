@@ -33,9 +33,6 @@ export class MainMenu extends Scene {
 
         const camera = this.cameras.main;
 
-        camera.postFX.addVignette(0.5, 0.5, 0.9, 0.2);
-        camera.postFX.addTiltShift(0.5, 2.0, 0.4);
-
         this.tweens.add({
             targets: camera,
             scrollY: 350,
@@ -48,8 +45,10 @@ export class MainMenu extends Scene {
         uiCamera.ignore(this.children.list);
         const logo = this.add.image(512, 0, 'logo').setScrollFactor(0).setOrigin(0.5, 0).setScale(0.75);
 
-        const fx1 = logo.postFX.addGlow(0xb056ac, 5, 0, false, 0.1, 32);
-        const fx2 = logo.postFX.addGlow(0xffffff, 1, 0, false, 0.1, 5);
+        logo.enableFilters();
+
+        const fx1 = logo.filters.external.addGlow(0xb056ac, 5, 0, 2, false, 16);
+        const fx2 = logo.filters.external.addGlow(0xffffff, 1, 0, 2, false, 8);
 
         this.tweens.add({
             targets: fx1,

@@ -10,14 +10,19 @@ export class MobileControls {
     constructor(scene: Phaser.Scene) {
         this.scene = scene;
 
-        this.button = scene.add.image(876, 680, 'button_empty')
-            .setDisplaySize(100, 100)
+        this.button = scene.add.image(876, 680, 'button_green_back')
+            .setDisplaySize(150, 150)
             .setInteractive()
             .setDepth(100)
+            .setName('button')
             .on('pointerdown', () => {
+                this.button.setDisplaySize(140, 140);
                 if (this.buttonAction) {
                     this.buttonAction();
                 }
+            })
+            .on('pointerup', () => {
+                this.button.setDisplaySize(150, 150);
             });
 
         this.joystick = new VirtualJoystick(scene, {
@@ -25,23 +30,25 @@ export class MobileControls {
             y: 680,
             radius: 50,
             base: scene.add.image(0, 0, 'joystick_bg').
+                setName('joystick_base').
                 setDisplaySize(100, 100).
                 setDepth(100),
             thumb: scene.add.image(0, 0, 'joystick').
-                setDisplaySize(60, 60).
+                setName('joystick_thumb').
+                setDisplaySize(80, 80).
                 setDepth(100)
         });
 
         this.cursorKeys = this.joystick.createCursorKeys();
     }
 
-    setButtonAction(action: () => void): void {
-        this.button.setTexture("button_green");
+    setButtonAction(action: () => void, texture: string = "button_green"): void {
+        this.button.setTexture(texture);
         this.buttonAction = action;
     }
 
     resetButtonAction(): void {
-        this.button.setTexture("button_empty");
+        this.button.setTexture("button_green_back");
         this.buttonAction = () => { };
     }
 }

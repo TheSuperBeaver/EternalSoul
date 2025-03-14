@@ -2,20 +2,22 @@ import { MobileControls } from '../game/MobileControls';
 import { MainCharacter } from '../game/MainCharacter';
 import { GameMap } from '../game/GameMap';
 import { WitchHutMap } from '../game/maps/WitchHutMap';
+import { WitchHutInteriorMap } from '../game/maps/WitchHutInteriorMap';
 import { ChangeMapScene } from '../game/ChangeMapScene';
+import { GameCamera } from '../game/GameCamera';
 
 export class MainGame extends ChangeMapScene {
-    camera: Phaser.Cameras.Scene2D.Camera;
     controls: MobileControls;
     mainCharacter: MainCharacter;
-    controlsCamera: Phaser.Cameras.Scene2D.Camera;
+
     map: GameMap;
-    maps: { [key: string]: GameMap } = {};
+    maps: { [key: string]: new (...args: any[]) => GameMap } = {};
+    gameCamera: GameCamera;
 
     preload() {
-        this.load.scenePlugin('DisplayListWatcher', 'https://cdn.jsdelivr.net/npm/phaser-plugin-display-list-watcher@1.2.1');
-        this.load.image('arrow_up', 'assets/images/arrow-up.png'); // Load arrow up image
-        this.load.image('arrow_down', 'assets/images/arrow-down.png'); // Load arrow down image
+        if (!GameMap.filters) {
+            this.load.scenePlugin('DisplayListWatcher', 'https://cdn.jsdelivr.net/npm/phaser-plugin-display-list-watcher@1.2.1');
+        }
     }
 
     constructor() {
@@ -25,37 +27,14 @@ export class MainGame extends ChangeMapScene {
     create() {
         this.controls = new MobileControls(this);
         this.mainCharacter = new MainCharacter(this, 105, 430, this.controls);
-        this.map = new WitchHutMap(this, this.mainCharacter, this.controls);
-        this.maps['witch_hut'] = this.map;
+        this.gameCamera = new GameCamera(this, this.mainCharacter, this.controls);
+        this.gameCamera.create();
 
-        const cam = this.cameras.main;
-        cam.setBounds(0, 0, this.map.map.widthInPixels, this.map.map.heightInPixels);
-        cam.postFX.addVignette(0.5, 0.5, 0.9, 0.2);
-        cam.startFollow(this.mainCharacter);
-        cam.ignore([this.controls.joystick.base, this.controls.joystick.thumb, this.controls.button, this.mainCharacter]);
-
-        this.controlsCamera = this.cameras.add(0, 0, this.cameras.main.width, this.cameras.main.height);
-        this.controlsCamera.ignore(this.map.map.layers.map(layer => layer.tilemapLayer));
-        this.controlsCamera.ignore([this.map.clouds]);
-
-        // Add arrow up button
-        this.add.image(50, 50, 'arrow_up')
-            .setInteractive()
-            .setDepth(100)
-            .setScale(0.1)
-            .on('pointerdown', () => {
-                this.mainCharacter.setDepth(this.mainCharacter.depth + 1);
-
-            });
-
-        // Add arrow down button
-        this.add.image(50, 100, 'arrow_down')
-            .setInteractive()
-            .setDepth(100)
-            .setScale(0.1)
-            .on('pointerdown', () => {
-                this.mainCharacter.setDepth(this.mainCharacter.depth - 1);
-            });
+        this.maps['witch_hut'] = WitchHutMap;
+        this.maps['witch_hut_interior'] = WitchHutInteriorMap;
+        this.map = new this.maps['witch_hut'](this, this.mainCharacter, this.controls);
+        this.map.create();
+        this.gameCamera.changeMap(this.map);
     }
 
     update() {
@@ -63,7 +42,22 @@ export class MainGame extends ChangeMapScene {
         this.map.update();
     }
 
-    changeMap(newMap: string) {
-        console.log("Change map to ", newMap);
+    changeMap(newMap: string, toPosition: string | undefined): void {
+        const cam = this.cameras.main;
+
+        // Fade out the current view
+        cam.fadeOut(1000, 0, 0, 0);
+
+        // When the fade out is complete, switch to the new map and fade in
+        cam.once('camerafadeoutcomplete', () => {
+            this.map.destroy();
+            this.map = new this.maps[newMap](this, this.mainCharacter, this.controls);
+            this.map.create();
+            this.map.moveToPosition(toPosition)
+            this.gameCamera.changeMap(this.map);
+
+            // Fade in the new view
+            cam.fadeIn(1000, 0, 0, 0);
+        });
     }
 }

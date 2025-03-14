@@ -167,7 +167,7 @@ All rights reserved.
 3. Sortir de la forêt permet d'arriver dans la carte du monde, trouver un village
     a. ??
     b. Chercher le prochain temple, qui s'affiche sur la carte du monde
-4. Temple de la connection
+4. Sanctuaire de la connection
     a. pièges, charots qui te courrent après ... 
     b. élément à trouver : aimant 
     c. permet d'ouvrir la porte et de trouver son compagnon, un castor
@@ -175,7 +175,7 @@ All rights reserved.
     a. différents portails, chaque choix ramène a une histoire passée
     b. ??
 6. 
-7. Tour de la réalisation
+7. Tour de l'accomplissement
     a. à chaque étage de la tour une énigme à trouver
     b. arriver tout en haut permet de découvrir la personne qui l'a guidée jusqu'à là depuis le début
     c. le castor permet d'enlever ses chaînes en bois et de le libérer
