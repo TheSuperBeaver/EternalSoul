@@ -8,11 +8,11 @@ export class Preloader extends Scene {
     }
 
     init() {
-        this.add.image(512, 380, 'background').setScale(2.0);
-        this.add.rectangle(512, 380, 468, 32).setStrokeStyle(1, 0xffffff);
+        this.add.image(750, 375, 'background').setScale(2.0);
+        this.add.rectangle(750, 400, 468, 32).setStrokeStyle(1, 0xffffff);
 
-        const bar = this.add.rectangle(512 - 230, 380, 4, 28, 0xffffff);
-        const loadingText = this.add.text(512, 330, 'Chargement ...', { fontSize: '30px', color: '#ffffff', fontFamily: 'Arial Black' }).setOrigin(0.5);
+        const bar = this.add.rectangle(750 - 230, 400, 4, 28, 0xffffff);
+        const loadingText = this.add.text(750, 350, 'Chargement ...', { fontSize: '30px', color: '#ffffff', fontFamily: 'Arial Black' }).setOrigin(0.5);
 
         this.load.on('fileprogress', (file: Phaser.Loader.File) => {
             const displayText = this.assetTextMap[file.key] || `Chargement : ${file.key}`;

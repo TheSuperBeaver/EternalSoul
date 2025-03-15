@@ -10,7 +10,7 @@ export class MobileControls {
     constructor(scene: Phaser.Scene) {
         this.scene = scene;
 
-        this.button = scene.add.image(876, 680, 'button_green_back')
+        this.button = scene.add.image(1350, 650, 'button_green_back')
             .setDisplaySize(150, 150)
             .setInteractive()
             .setDepth(100)
@@ -22,20 +22,20 @@ export class MobileControls {
                 }
             })
             .on('pointerup', () => {
-                this.button.setDisplaySize(150, 150);
+                this.button.setDisplaySize(200, 200);
             });
 
         this.joystick = new VirtualJoystick(scene, {
             x: 150,
-            y: 680,
+            y: 650,
             radius: 50,
             base: scene.add.image(0, 0, 'joystick_bg').
                 setName('joystick_base').
-                setDisplaySize(100, 100).
+                setDisplaySize(150, 150).
                 setDepth(100),
             thumb: scene.add.image(0, 0, 'joystick').
                 setName('joystick_thumb').
-                setDisplaySize(80, 80).
+                setDisplaySize(135, 135).
                 setDepth(100)
         });
 

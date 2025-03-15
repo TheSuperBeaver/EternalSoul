@@ -14,6 +14,7 @@ export class MapInteractions {
     character: MainCharacter;
     controls: MobileControls;
     scaleValue: number;
+    interactionContainer: Phaser.GameObjects.Container;
 
     constructor(scene: ChangeMapScene, map: Phaser.Tilemaps.Tilemap, character: MainCharacter, controls: MobileControls, scaleValue: number) {
         this.scene = scene;
@@ -27,6 +28,7 @@ export class MapInteractions {
         this.interactions = [];
         this.interactionText.destroy();
         this.interactionTitle.destroy();
+        this.interactionContainer.destroy();
     }
 
     create() {
@@ -60,7 +62,7 @@ export class MapInteractions {
             setScale(0.6).
             setDepth(200).
             setVisible(false);
-        this.scene.add.container(512, 50, [this.interactionTitle, this.interactionText]).
+        this.interactionContainer = this.scene.add.container(750, 50, [this.interactionTitle, this.interactionText]).
             setDepth(200).
             setName('interaction')
             ;

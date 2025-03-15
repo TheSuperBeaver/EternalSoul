@@ -3,6 +3,7 @@ import { MobileControls } from './MobileControls';
 export class MainCharacter extends Phaser.Physics.Arcade.Sprite {
     speed: number;
     controls: MobileControls;
+    light: Phaser.GameObjects.Light | undefined;
 
     constructor(scene: Phaser.Scene, x: number, y: number, joystick: MobileControls, speed: number = 100) {
         super(scene, x, y, 'main_char_idle', 3);
@@ -46,6 +47,16 @@ export class MainCharacter extends Phaser.Physics.Arcade.Sprite {
         });
     }
 
+    activateLights() {
+        this.setLighting(true);
+        this.light = this.scene.lights.addLight(this.x, this.y, 50, 0xf5bf2a);
+    }
+
+    deactivateLights() {
+        this.setLighting(false);
+        this.light = undefined;
+    }
+
     update(): void {
         const cursorKeys = this.controls.cursorKeys;
 
@@ -77,6 +88,9 @@ export class MainCharacter extends Phaser.Physics.Arcade.Sprite {
         } else {
             this.setVelocity(0, 0);
             this.anims.stop();
+        }
+        if (this.light) {
+            this.light.setPosition(this.x, this.y);
         }
     }
 }

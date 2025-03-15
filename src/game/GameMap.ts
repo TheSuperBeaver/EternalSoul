@@ -1,5 +1,6 @@
 import { ChangeMapScene } from "./ChangeMapScene";
 import { Clouds } from "./Clouds";
+import { GameLight } from "./GameLight";
 import { MainCharacter } from "./MainCharacter";
 import { MapInteractions } from "./MapInteractions";
 import { MapPosition } from "./MapPosition";
@@ -17,6 +18,7 @@ export abstract class GameMap {
     cloudTilemap: string | undefined;
     scaleValue: number;
     positions: { [key: string]: MapPosition } = {};
+    lights: GameLight[] = [];
     mapInteractions: MapInteractions;
     controls: MobileControls;
     clouds: Clouds | null;
@@ -39,6 +41,8 @@ export abstract class GameMap {
         this.clouds?.clouds.destroy();
         this.clouds = null;
         this.mapInteractions.destroy();
+        this.scene.lights.destroy();
+        this.mainCharacter.setLighting(false);
     }
 
     create(): void {
@@ -46,6 +50,7 @@ export abstract class GameMap {
         Object.keys(this.tilesetImages).forEach(key => {
             this.map.addTilesetImage(key, this.tilesetImages[key]);
         });
+        this.createLights();
 
         this.map.layers.forEach(layer => {
             this.createLayer(layer);
@@ -91,6 +96,9 @@ export abstract class GameMap {
                     });
                 }
             }
+            if (this.lights.length > 0) {
+                layer.setLighting(true);
+            }
         }
     }
 
@@ -107,6 +115,30 @@ export abstract class GameMap {
         const startPosition = positionsObjects?.find(obj => obj.properties.find((prop: { name: string; }) => prop.name === 'position')?.value === 'start');
         this.mainCharacter.setX((startPosition?.x ?? 0) * this.scaleValue);
         this.mainCharacter.setY((startPosition?.y ?? 0) * this.scaleValue);
+    }
+
+    createLights() {
+        const lightsObjects = this.map.getObjectLayer('Lights')?.objects;
+        lightsObjects?.forEach(obj => {
+            this.lights.push(new GameLight(
+                (obj.x ?? 0) * this.scaleValue,
+                (obj.y ?? 0) * this.scaleValue,
+                obj.properties.find((prop: { name: string; }) => prop.name === 'type')?.value || '',
+                obj.properties.find((prop: { name: string; }) => prop.name === 'radius')?.value || 10,
+                obj.properties.find((prop: { name: string; }) => prop.name === 'rgb')?.value || 0,
+                obj.properties.find((prop: { name: string; }) => prop.name === 'intensity')?.value || 10
+            ));
+        });
+
+        if (this.lights.length > 0) {
+            this.mainCharacter.activateLights();
+
+            this.lights.forEach(light => {
+                this.scene.lights.addLight(light.x, light.y, 200);
+                console.log('Light added : ', light);
+            })
+            this.scene.lights.enable().setAmbientColor(0x111111);
+        }
     }
 
     moveToPosition(toPosition: string | undefined) {

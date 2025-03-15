@@ -8,13 +8,14 @@ import { Game, Types } from "phaser";
 
 const config: Types.Core.GameConfig = {
     type: Phaser.WEBGL,
-    width: 1024,
-    height: 768,
+    width: 1500,
+    height: 750,
     parent: 'game-container',
     backgroundColor: '#111111',
     scale: {
         mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        expandParent: true
     },
     scene: [
         Boot,
@@ -33,6 +34,9 @@ const config: Types.Core.GameConfig = {
             debug: false
         }
     },
+    fullscreenTarget: 'game-container',
+
+
 
 };
 
