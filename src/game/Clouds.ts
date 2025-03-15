@@ -3,7 +3,7 @@ export class Clouds {
     constructor(scene: Phaser.Scene, tilemap: string = 'clouds') {
         this.clouds = scene.add.tileSprite(0, 0, 0, 0, tilemap);
         this.clouds.setOrigin(0, 0);
-        this.clouds.setScrollFactor(0);
+        //this.clouds.setScrollFactor(0);
         this.clouds.setDepth(100);
         this.clouds.setName(tilemap);
     }

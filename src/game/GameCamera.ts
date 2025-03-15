@@ -41,24 +41,6 @@ export class GameCamera {
     }
 
     changeMap(map: GameMap) {
-        const mapWidth = map.map.widthInPixels * map.scaleValue;
-        const mapHeight = map.map.heightInPixels * map.scaleValue;
-        const screenWidth = this.scene.scale.width;
-        const screenHeight = this.scene.scale.height;
-
-        // Set the bounds for the camera and the map
-        this.mainCamera.setBounds(0, 0, mapWidth, mapHeight);
-
-        if (mapWidth < screenWidth || mapHeight < screenHeight) {
-            const offsetX = Math.max(0, (screenWidth - mapWidth) / 2);
-            const offsetY = Math.max(0, (screenHeight - mapHeight) / 2);
-            this.mainCamera.setViewport(offsetX, offsetY, mapWidth, mapHeight);
-            this.controlsCamera.setViewport(offsetX, offsetY, mapWidth, mapHeight);
-        } else {
-            this.mainCamera.setViewport(0, 0, screenWidth, screenHeight);
-            this.controlsCamera.setViewport(0, 0, mapWidth, mapHeight);
-        }
-
         this.mainCamera.startFollow(this.mainCharacter);
         this.mainCamera.pan(this.mainCharacter.x, this.mainCharacter.y, 1000, 'Linear', true);
         this.mainCamera.ignore([map.mapInteractions.interactionContainer, map.mapInteractions.interactionText, map.mapInteractions.interactionTitle]);

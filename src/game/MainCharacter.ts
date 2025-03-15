@@ -48,12 +48,10 @@ export class MainCharacter extends Phaser.Physics.Arcade.Sprite {
     }
 
     activateLights() {
-        this.setLighting(true);
-        this.light = this.scene.lights.addLight(this.x, this.y, 50, 0xf5bf2a);
+        this.light = this.scene.lights.addLight(this.x, this.y, 150, 0xf5bf2a, 2);
     }
 
     deactivateLights() {
-        this.setLighting(false);
         this.light = undefined;
     }
 

@@ -134,10 +134,9 @@ export abstract class GameMap {
             this.mainCharacter.activateLights();
 
             this.lights.forEach(light => {
-                this.scene.lights.addLight(light.x, light.y, 200);
-                console.log('Light added : ', light);
+                this.scene.lights.addLight(light.x, light.y, light.radius, light.rgb, light.intensity);
             })
-            this.scene.lights.enable().setAmbientColor(0x111111);
+            this.scene.lights.enable().setAmbientColor(0x333333);
         }
     }
 
