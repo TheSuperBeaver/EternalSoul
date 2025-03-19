@@ -463,12 +463,12 @@
                         {
                          "name":"radius",
                          "type":"int",
-                         "value":128
+                         "value":64
                         }, 
                         {
                          "name":"rgb",
-                         "type":"int",
-                         "value":254
+                         "type":"string",
+                         "value":"#0c0480"
                         }, 
                         {
                          "name":"type",
@@ -479,8 +479,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":47.3333,
-                 "y":93.3333
+                 "x":47,
+                 "y":94
                 }, 
                 {
                  "height":0,
@@ -501,7 +501,7 @@
                         {
                          "name":"rgb",
                          "type":"string",
-                         "value":"0xffffff"
+                         "value":"#faf6a5"
                         }, 
                         {
                          "name":"type",
@@ -533,8 +533,8 @@
                         }, 
                         {
                          "name":"rgb",
-                         "type":"int",
-                         "value":254
+                         "type":"string",
+                         "value":"#faf6a5"
                         }, 
                         {
                          "name":"type",
@@ -545,17 +545,56 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":347.333333333333,
-                 "y":378.666666666667
+                 "x":347,
+                 "y":379
+                }, 
+                {
+                 "height":0,
+                 "id":12,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"intensity",
+                         "type":"int",
+                         "value":2
+                        }, 
+                        {
+                         "name":"radius",
+                         "type":"int",
+                         "value":256
+                        }, 
+                        {
+                         "name":"rgb",
+                         "type":"string",
+                         "value":"#ffa3a3"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"ceiling"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":190,
+                 "y":304
                 }],
          "opacity":1,
+         "properties":[
+                {
+                 "name":"ambient",
+                 "type":"string",
+                 "value":"#555555"
+                }],
          "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
         }],
  "nextlayerid":10,
- "nextobjectid":12,
+ "nextobjectid":13,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

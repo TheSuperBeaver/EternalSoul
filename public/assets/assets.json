@@ -1,6 +1,7 @@
 {
     "assets": [
         { "key": "forest", "type": "atlas", "path": "assets/sprites/glade.png", "data": "assets/sprites/glade.json", "text": "Chargement forêt" },
+        { "key": "nine-slice", "type": "atlas", "path": "assets/sprites/nine-slice.png", "data": "assets/sprites/nine-slice.json", "text": "Chargement textes" },
 
         { "key": "main_char_idle", "type": "spritesheet", "path": "assets/characters/main/idle.png", "frameWidth": 64, "frameHeight": 64, "text": "Chargement personnage" },
         { "key": "main_char_walk", "type": "spritesheet", "path": "assets/characters/main/walk.png", "frameWidth": 64, "frameHeight": 64, "text": "Chargement personnage" },
@@ -44,8 +45,6 @@
         { "key": "title", "type": "image", "path": "assets/buttons/title.png", "text": "Chargement boutons" },
         { "key": "title_full", "type": "image", "path": "assets/buttons/title_full.png", "text": "Chargement boutons" },
         
-        { "key": "story", "type": "json", "path": "assets/texts/story.json", "text": "Chargement textes" },
-        
-        { "key": "rexvirtualjoystickplugin", "type": "plugin", "path": "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/v4.0.0-alpha/dist/rexvirtualjoystickplugin.min.js", "text": "Chargement joystick" }
+        { "key": "story", "type": "json", "path": "assets/texts/story.json", "text": "Chargement textes" }
     ]
 }

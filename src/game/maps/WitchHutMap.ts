@@ -13,7 +13,7 @@ export class WitchHutMap extends GameMap {
             'magic_tileset': 'magic_tileset',
             'spring_outdoors_tileset': 'spring_outdoors_tileset'
         };
-        super(scene, mainCharacter, mobileControls, 'witch_hut', tilesetImages, 'clouds', 2);
+        super(scene, mainCharacter, mobileControls, 'witch_hut', tilesetImages, 'clouds', 2, 1);
     }
 
     update(): void {

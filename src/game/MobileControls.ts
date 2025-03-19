@@ -1,4 +1,4 @@
-import VirtualJoystick from 'phaser3-rex-plugins/plugins/virtualjoystick.js';
+import VirtualJoystick from '../../phaser3-rex-plugins/plugins/virtualjoystick.js';
 
 export class MobileControls {
     scene: Phaser.Scene;

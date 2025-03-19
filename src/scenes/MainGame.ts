@@ -12,7 +12,7 @@ export class MainGame extends ChangeMapScene {
 
     map: GameMap;
     maps: { [key: string]: new (...args: any[]) => GameMap } = {};
-    gameCamera: GameCamera;
+
 
     preload() {
         if (!GameMap.filters) {

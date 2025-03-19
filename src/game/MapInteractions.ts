@@ -1,4 +1,5 @@
 import { ChangeMapScene } from "./ChangeMapScene";
+import { GameDialog } from "./GameDialog";
 import { Interaction } from "./Interaction";
 import { MainCharacter } from "./MainCharacter";
 import { MobileControls } from "./MobileControls";
@@ -8,6 +9,7 @@ export class MapInteractions {
     interactions: Interaction[] = [];
     interactionText: Phaser.GameObjects.Text;
     interactionTitle: Phaser.GameObjects.Image;
+    dialog: GameDialog;
 
     scene: ChangeMapScene;
     map: Phaser.Tilemaps.Tilemap;
@@ -22,6 +24,7 @@ export class MapInteractions {
         this.character = character;
         this.controls = controls;
         this.scaleValue = scaleValue;
+        this.dialog = new GameDialog(this.scene);
     }
 
     destroy() {
@@ -29,6 +32,8 @@ export class MapInteractions {
         this.interactionText.destroy();
         this.interactionTitle.destroy();
         this.interactionContainer.destroy();
+        this.dialog.destroy();
+        this.dialog = new GameDialog(this.scene);
     }
 
     create() {
@@ -84,6 +89,8 @@ export class MapInteractions {
             return false;
         });
 
+
+
         if (closePoint) {
             this.interactionText.setText(closePoint.text).setVisible(true);
             this.interactionTitle.setVisible(true);
@@ -96,12 +103,15 @@ export class MapInteractions {
             } else if (closePoint.action === 'make_potion') {
                 this.controls.setButtonAction(() => { }, "button_skin_nipple");
             } else if (closePoint.action === 'pet_cat') {
-                this.controls.setButtonAction(() => { }, "button_cat");
+                this.controls.setButtonAction(() => {
+                    this.dialog.create("Salem ronronne ...\nPuis semble dérangée ..");
+                }, "button_cat");
             }
         } else {
             this.interactionText.setVisible(false);
             this.interactionTitle.setVisible(false);
             this.controls.resetButtonAction();
+            this.dialog.destroy();
         }
     }
 

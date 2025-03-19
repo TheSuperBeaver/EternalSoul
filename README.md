@@ -163,7 +163,7 @@ All rights reserved.
 1. Histoire de début
 2. Perdue dans la forêt dense du "désespoir" 
     a. des esprits de négativité obligent à retourner au point de départ
-    b. élément à trouver : miroir de la vérité, qui permet de voir la sortie de la forêt
+    b. élément à trouver : sceptre lumineux, qui permet de voir la sortie de la forêt
 3. Sortir de la forêt permet d'arriver dans la carte du monde, trouver un village
     a. ??
     b. Chercher le prochain temple, qui s'affiche sur la carte du monde

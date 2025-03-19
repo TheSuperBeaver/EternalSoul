@@ -1,6 +1,6 @@
 import { ChangeMapScene } from "./ChangeMapScene";
 import { Clouds } from "./Clouds";
-import { GameLight } from "./GameLight";
+import { GameLights } from "./GameLights";
 import { MainCharacter } from "./MainCharacter";
 import { MapInteractions } from "./MapInteractions";
 import { MapPosition } from "./MapPosition";
@@ -17,13 +17,14 @@ export abstract class GameMap {
     tilesetImages: { [key: string]: string };
     cloudTilemap: string | undefined;
     scaleValue: number;
+    characterScale: number;
     positions: { [key: string]: MapPosition } = {};
-    lights: GameLight[] = [];
+    gameLights: GameLights;
     mapInteractions: MapInteractions;
     controls: MobileControls;
     clouds: Clouds | null;
 
-    constructor(scene: ChangeMapScene, mainCharacter: MainCharacter, mobileControls: MobileControls, mapKey: string, tilesetImages: { [key: string]: string }, cloudTilemap: string | undefined, scaleValue: number = 2) {
+    constructor(scene: ChangeMapScene, mainCharacter: MainCharacter, mobileControls: MobileControls, mapKey: string, tilesetImages: { [key: string]: string }, cloudTilemap: string | undefined, scaleValue: number = 2, characterScale: number = 2) {
         this.mainCharacter = mainCharacter;
         this.scene = scene;
         this.controls = mobileControls;
@@ -31,6 +32,7 @@ export abstract class GameMap {
         this.tilesetImages = tilesetImages;
         this.scaleValue = scaleValue;
         this.cloudTilemap = cloudTilemap;
+        this.characterScale = characterScale;
     }
 
     destroy(): void {
@@ -41,8 +43,7 @@ export abstract class GameMap {
         this.clouds?.clouds.destroy();
         this.clouds = null;
         this.mapInteractions.destroy();
-        this.scene.lights.destroy();
-        this.mainCharacter.setLighting(false);
+        this.gameLights.destroy();
     }
 
     create(): void {
@@ -50,7 +51,9 @@ export abstract class GameMap {
         Object.keys(this.tilesetImages).forEach(key => {
             this.map.addTilesetImage(key, this.tilesetImages[key]);
         });
-        this.createLights();
+
+        this.gameLights = new GameLights(this);
+        this.gameLights.create();
 
         this.map.layers.forEach(layer => {
             this.createLayer(layer);
@@ -61,6 +64,8 @@ export abstract class GameMap {
                 (layer.tilemapLayer.layer.properties as { name: string, value: any }[]).
                     find(prop => prop.name === 'collides')?.value).
                 map(layer => layer.tilemapLayer));
+
+        this.mainCharacter.setScale(this.characterScale);
 
         if (this.cloudTilemap) {
             this.clouds = new Clouds(this.scene, this.cloudTilemap);
@@ -96,7 +101,7 @@ export abstract class GameMap {
                     });
                 }
             }
-            if (this.lights.length > 0) {
+            if (this.gameLights.lights.length > 0) {
                 layer.setLighting(true);
             }
         }
@@ -117,29 +122,6 @@ export abstract class GameMap {
         this.mainCharacter.setY((startPosition?.y ?? 0) * this.scaleValue);
     }
 
-    createLights() {
-        const lightsObjects = this.map.getObjectLayer('Lights')?.objects;
-        lightsObjects?.forEach(obj => {
-            this.lights.push(new GameLight(
-                (obj.x ?? 0) * this.scaleValue,
-                (obj.y ?? 0) * this.scaleValue,
-                obj.properties.find((prop: { name: string; }) => prop.name === 'type')?.value || '',
-                obj.properties.find((prop: { name: string; }) => prop.name === 'radius')?.value || 10,
-                obj.properties.find((prop: { name: string; }) => prop.name === 'rgb')?.value || 0,
-                obj.properties.find((prop: { name: string; }) => prop.name === 'intensity')?.value || 10
-            ));
-        });
-
-        if (this.lights.length > 0) {
-            this.mainCharacter.activateLights();
-
-            this.lights.forEach(light => {
-                this.scene.lights.addLight(light.x, light.y, light.radius, light.rgb, light.intensity);
-            })
-            this.scene.lights.enable().setAmbientColor(0x333333);
-        }
-    }
-
     moveToPosition(toPosition: string | undefined) {
         if (toPosition && this.positions[toPosition]) {
             const position = this.positions[toPosition];
@@ -149,7 +131,7 @@ export abstract class GameMap {
             if (startPosition) {
                 this.mainCharacter.setPosition(startPosition.x, startPosition.y);
             } else {
-                this.mainCharacter.setPosition(1024 / 2, 768 / 2);
+                this.mainCharacter.setPosition(1500 / 2, 750 / 2);
             }
         }
     }
