@@ -54,6 +54,20 @@ export class GameLights {
                         return;
                     case 'lamp':
                         return;
+                    case 'flame':
+                        var ellipse = new Phaser.Geom.Ellipse(newLight.x, newLight.y, 15, 20)
+                        this.gameMap.scene.time.addEvent({
+                            delay: 200,
+                            callback: function () {
+                                const tempVector = new Phaser.Math.Vector2(newLight.x, newLight.y);
+                                Phaser.Geom.Ellipse.Random(ellipse, tempVector);
+                                newLight.x = tempVector.x;
+                                newLight.y = tempVector.y;
+                            },
+                            callbackScope: this,
+                            repeat: -1
+                        });
+                        return;
                     case 'ceiling':
                         this.gameMap.scene.tweens.add(
                             {

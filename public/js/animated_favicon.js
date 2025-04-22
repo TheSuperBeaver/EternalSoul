@@ -24,4 +24,4 @@ function updateFavicon() {
 }
 
 // Change favicon every 100ms (adjust speed as needed)
-setInterval(updateFavicon, 100);
+//setInterval(updateFavicon, 100);

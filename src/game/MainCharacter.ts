@@ -5,7 +5,7 @@ export class MainCharacter extends Phaser.Physics.Arcade.Sprite {
     controls: MobileControls;
     light: Phaser.GameObjects.Light | undefined;
 
-    constructor(scene: Phaser.Scene, x: number, y: number, joystick: MobileControls, speed: number = 100) {
+    constructor(scene: Phaser.Scene, x: number, y: number, joystick: MobileControls, speed: number = 125) {
         super(scene, x, y, 'main_char_idle', 3);
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -61,26 +61,40 @@ export class MainCharacter extends Phaser.Physics.Arcade.Sprite {
         let velocityX = 0;
         let velocityY = 0;
 
+
+
         if (cursorKeys.left.isDown) {
             velocityX = -1;
-            this.anims.play('left', true);
         } else if (cursorKeys.right.isDown) {
             velocityX = 1;
-            this.anims.play('right', true);
         }
 
         if (cursorKeys.up.isDown) {
             velocityY = -1;
-            this.anims.play('up', true);
         } else if (cursorKeys.down.isDown) {
             velocityY = 1;
-            this.anims.play('down', true);
         }
 
         if (velocityX !== 0 || velocityY !== 0) {
             const length = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
             velocityX = (velocityX / length) * this.speed;
             velocityY = (velocityY / length) * this.speed;
+
+            if (Math.abs(velocityX) > Math.abs(velocityY)) {
+                // Horizontal movement
+                if (velocityX > 0) {
+                    this.anims.play('right', true);
+                } else {
+                    this.anims.play('left', true);
+                }
+            } else {
+                // Vertical movement
+                if (velocityY > 0) {
+                    this.anims.play('down', true);
+                } else {
+                    this.anims.play('up', true);
+                }
+            }
 
             this.setVelocity(velocityX, velocityY);
         } else {

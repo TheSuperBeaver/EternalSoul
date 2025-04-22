@@ -1,50 +1,365 @@
 {
-    "assets": [
-        { "key": "forest", "type": "atlas", "path": "assets/sprites/glade.png", "data": "assets/sprites/glade.json", "text": "Chargement forêt" },
-        { "key": "nine-slice", "type": "atlas", "path": "assets/sprites/nine-slice.png", "data": "assets/sprites/nine-slice.json", "text": "Chargement textes" },
+  "assets": [
+    {
+      "key": "forest",
+      "type": "atlas",
+      "path": "assets/sprites/glade.png",
+      "data": "assets/sprites/glade.json",
+      "text": "Chargement forêt"
+    },
+    {
+      "key": "nine-slice",
+      "type": "atlas",
+      "path": "assets/sprites/nine-slice.png",
+      "data": "assets/sprites/nine-slice.json",
+      "text": "Chargement textes"
+    },
+    {
+      "key": "props",
+      "type": "image",
+      "path": "assets/sprites/props.png",
+      "text": "Chargement objets"
+    },
+    {
+      "key": "bonfire",
+      "type": "image",
+      "path": "assets/sprites/bonfire.png",
+      "text": "Chargement objets"
+    },
+    {
+      "key": "main_char_idle",
+      "type": "spritesheet",
+      "path": "assets/characters/main/idle.png",
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "text": "Chargement personnage"
+    },
+    {
+      "key": "shadow",
+      "type": "spritesheet",
+      "path": "assets/sprites/shadow.png",
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "text": "Chargement monstres"
+    },
+    {
+      "key": "main_char_walk",
+      "type": "spritesheet",
+      "path": "assets/characters/main/walk.png",
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "text": "Chargement personnage"
+    },
 
-        { "key": "main_char_idle", "type": "spritesheet", "path": "assets/characters/main/idle.png", "frameWidth": 64, "frameHeight": 64, "text": "Chargement personnage" },
-        { "key": "main_char_walk", "type": "spritesheet", "path": "assets/characters/main/walk.png", "frameWidth": 64, "frameHeight": 64, "text": "Chargement personnage" },
-        
-        { "key": "logo", "type": "image", "path": "assets/images/logo.png", "text": "Chargement logo" },
-        { "key": "grimoire", "type": "image", "path": "assets/images/grimoire.png", "text": "Chargement grimoire" },
-        { "key": "grimoire_open", "type": "image", "path": "assets/images/grimoire_open.png", "text": "Chargement grimoire" },
-        { "key": "scroll", "type": "image", "path": "assets/images/scroll.png", "text": "Chargement messages" },
-        { "key": "clouds", "type": "image", "path": "assets/images/clouds.png", "text": "Chargement décor" },
-        { "key": "fog", "type": "image", "path": "assets/images/fog.png", "text": "Chargement décor" },
-        { "key": "wood_sign", "type": "image", "path": "assets/images/wood_sign.png", "text": "Chargement images" },
+    {
+      "key": "salem",
+      "type": "image",
+      "path": "assets/characters/salem.png",
+      "text": "Chargement Salem"
+    },
 
-        
-        { "key": "forest_tileset", "type": "image", "path": "assets/tiles/forest.png", "text": "Chargement décor" },
-        { "key": "chalet_tileset", "type": "image", "path": "assets/tiles/chalet_bois.png", "text": "Chargement meubles" },
-        { "key": "treetrunk_tileset", "type": "image", "path": "assets/tiles/treetrunk_tileset.png", "text": "Chargement décor" },
-        { "key": "tree1_fall_tileset", "type": "image", "path": "assets/tiles/tree1_fall_tileset.png", "text": "Chargement décor" },
-        { "key": "tree2_fall_tileset", "type": "image", "path": "assets/tiles/tree2_fall_tileset.png", "text": "Chargement décor" },
-        { "key": "tree8_fall_tileset", "type": "image", "path": "assets/tiles/tree8_fall_tileset.png", "text": "Chargement décor" },
-        { "key": "cooking_tileset", "type": "image", "path": "assets/tiles/cooking.png", "text": "Chargement décor" },
-        { "key": "magic_tileset", "type": "image", "path": "assets/tiles/magic.png", "text": "Chargement magie" },
-        { "key": "rug_hut_tileset", "type": "image", "path": "assets/tiles/rug_hut.png", "text": "Chargement décor" },
-        { "key": "spring_outdoors_tileset", "type": "image", "path": "assets/tiles/spring_outdoors_tileset.png", "text": "Chargement décor" },
-        { "key": "beds_tileset", "type": "image", "path": "assets/tiles/beds_tileset.png", "text": "Chargement meubles" },
-        { "key": "bookshelf_tileset", "type": "image", "path": "assets/tiles/bookshelf_tileset.png", "text": "Chargement meubles" },
-        { "key": "bookshelf2_tileset", "type": "image", "path": "assets/tiles/bookshelf2_tileset.png", "text": "Chargement meubles" },
-        
-        { "key": "witch_hut", "type": "tilemapTiledJSON", "path": "assets/maps/witch_hut.json", "text": "Chargement décor" },
-        { "key": "witch_hut_interior", "type": "tilemapTiledJSON", "path": "assets/maps/witch_hut_interior.json", "text": "Chargement décor" },
-        
-        { "key": "button", "type": "image", "path": "assets/buttons/button_fantasy1.png", "text": "Chargement boutons" },
-        { "key": "button_down", "type": "image", "path": "assets/buttons/button_fantasy1d.png", "text": "Chargement boutons" },
-        { "key": "button_highlight", "type": "image", "path": "assets/buttons/button_fantasy1h.png", "text": "Chargement boutons" },
-        { "key": "button_cat", "type": "image", "path": "assets/buttons/button_cat.png", "text": "Chargement boutons" },
-        { "key": "joystick_bg", "type": "image", "path": "assets/buttons/joystick_bg.png", "text": "Chargement boutons" },
-        { "key": "joystick", "type": "image", "path": "assets/buttons/joystick.png", "text": "Chargement boutons" },
-        { "key": "button_green", "type": "image", "path": "assets/buttons/button_green.png", "text": "Chargement boutons" },
-        { "key": "button_green_back", "type": "image", "path": "assets/buttons/button_green_back.png", "text": "Chargement boutons" },
-        { "key": "button_skin_nipple", "type": "image", "path": "assets/buttons/button_skin_nipple.png", "text": "Chargement boutons" },
-        { "key": "button_door", "type": "image", "path": "assets/buttons/button_door.png", "text": "Chargement boutons" },
-        { "key": "title", "type": "image", "path": "assets/buttons/title.png", "text": "Chargement boutons" },
-        { "key": "title_full", "type": "image", "path": "assets/buttons/title_full.png", "text": "Chargement boutons" },
-        
-        { "key": "story", "type": "json", "path": "assets/texts/story.json", "text": "Chargement textes" }
-    ]
+    {
+      "key": "logo",
+      "type": "image",
+      "path": "assets/images/logo.png",
+      "text": "Chargement logo"
+    },
+    {
+      "key": "grimoire",
+      "type": "image",
+      "path": "assets/images/grimoire.png",
+      "text": "Chargement grimoire"
+    },
+    {
+      "key": "grimoire_open",
+      "type": "image",
+      "path": "assets/images/grimoire_open.png",
+      "text": "Chargement grimoire"
+    },
+    {
+      "key": "bandeau",
+      "type": "image",
+      "path": "assets/images/bandeau.png",
+      "text": "Chargement parchemin"
+    },
+    {
+      "key": "scroll_2",
+      "type": "image",
+      "path": "assets/images/scroll_2.png",
+      "text": "Chargement parchemin"
+    },
+    {
+      "key": "scroll",
+      "type": "image",
+      "path": "assets/images/scroll.png",
+      "text": "Chargement messages"
+    },
+    {
+      "key": "clouds",
+      "type": "image",
+      "path": "assets/images/clouds.png",
+      "text": "Chargement décor"
+    },
+    {
+      "key": "fog",
+      "type": "image",
+      "path": "assets/images/fog.png",
+      "text": "Chargement décor"
+    },
+    {
+      "key": "map_title",
+      "type": "image",
+      "path": "assets/images/map_title.png",
+      "text": "Chargement images"
+    },
+    {
+      "key": "wood_sign",
+      "type": "image",
+      "path": "assets/images/wood_sign.png",
+      "text": "Chargement images"
+    },
+
+    {
+      "key": "forest_tileset",
+      "type": "image",
+      "path": "assets/tiles/forest.png",
+      "text": "Chargement décor"
+    },
+    {
+      "key": "swamp_tileset",
+      "type": "image",
+      "path": "assets/tiles/swamp_tileset.png",
+      "text": "Chargement décor"
+    },
+    {
+      "key": "forest_2",
+      "type": "image",
+      "path": "assets/tiles/forest_2.png",
+      "text": "Chargement décor"
+    },
+    {
+      "key": "chalet_tileset",
+      "type": "image",
+      "path": "assets/tiles/chalet_bois.png",
+      "text": "Chargement meubles"
+    },
+    {
+      "key": "treetrunk_tileset",
+      "type": "image",
+      "path": "assets/tiles/treetrunk_tileset.png",
+      "text": "Chargement décor"
+    },
+    {
+      "key": "tree1_fall_tileset",
+      "type": "image",
+      "path": "assets/tiles/tree1_fall_tileset.png",
+      "text": "Chargement décor"
+    },
+    {
+      "key": "tree2_fall_tileset",
+      "type": "image",
+      "path": "assets/tiles/tree2_fall_tileset.png",
+      "text": "Chargement décor"
+    },
+    {
+      "key": "tree8_fall_tileset",
+      "type": "image",
+      "path": "assets/tiles/tree8_fall_tileset.png",
+      "text": "Chargement décor"
+    },
+    {
+      "key": "cooking_tileset",
+      "type": "image",
+      "path": "assets/tiles/cooking.png",
+      "text": "Chargement décor"
+    },
+    {
+      "key": "magic_tileset",
+      "type": "image",
+      "path": "assets/tiles/magic.png",
+      "text": "Chargement magie"
+    },
+    {
+      "key": "rug_hut_tileset",
+      "type": "image",
+      "path": "assets/tiles/rug_hut.png",
+      "text": "Chargement décor"
+    },
+    {
+      "key": "spring_outdoors_tileset",
+      "type": "image",
+      "path": "assets/tiles/spring_outdoors_tileset.png",
+      "text": "Chargement décor"
+    },
+    {
+      "key": "beds_tileset",
+      "type": "image",
+      "path": "assets/tiles/beds_tileset.png",
+      "text": "Chargement meubles"
+    },
+    {
+      "key": "bookshelf_tileset",
+      "type": "image",
+      "path": "assets/tiles/bookshelf_tileset.png",
+      "text": "Chargement meubles"
+    },
+    {
+      "key": "bookshelf2_tileset",
+      "type": "image",
+      "path": "assets/tiles/bookshelf2_tileset.png",
+      "text": "Chargement meubles"
+    },
+
+    {
+      "key": "witch_hut",
+      "type": "tilemapTiledJSON",
+      "path": "assets/maps/witch_hut.json",
+      "text": "Chargement décor"
+    },
+    {
+      "key": "witch_hut_interior",
+      "type": "tilemapTiledJSON",
+      "path": "assets/maps/witch_hut_interior.json",
+      "text": "Chargement décor"
+    },
+    {
+      "key": "lost_forest",
+      "type": "tilemapTiledJSON",
+      "path": "assets/maps/lost_forest.json",
+      "text": "Chargement décor"
+    },
+    {
+      "key": "button",
+      "type": "image",
+      "path": "assets/buttons/button_fantasy1.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "button_down",
+      "type": "image",
+      "path": "assets/buttons/button_fantasy1d.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "button_highlight",
+      "type": "image",
+      "path": "assets/buttons/button_fantasy1h.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "button_cat",
+      "type": "image",
+      "path": "assets/buttons/button_cat.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "mappemonde",
+      "type": "image",
+      "path": "assets/buttons/mappemonde.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "button_potion",
+      "type": "image",
+      "path": "assets/buttons/button_potion.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "button_unknown",
+      "type": "image",
+      "path": "assets/buttons/button_unknown.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "joystick_bg",
+      "type": "image",
+      "path": "assets/buttons/joystick_bg.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "joystick",
+      "type": "image",
+      "path": "assets/buttons/joystick.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "button_green",
+      "type": "image",
+      "path": "assets/buttons/button_green.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "button_green_back",
+      "type": "image",
+      "path": "assets/buttons/button_green_back.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "button_skin_nipple",
+      "type": "image",
+      "path": "assets/buttons/button_skin_nipple.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "button_skin",
+      "type": "image",
+      "path": "assets/buttons/button_skin.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "button_nipple",
+      "type": "image",
+      "path": "assets/buttons/button_nipple.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "button_sign",
+      "type": "image",
+      "path": "assets/buttons/button_sign.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "statue",
+      "type": "image",
+      "path": "assets/buttons/statue.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "crystal_ball",
+      "type": "image",
+      "path": "assets/buttons/crystal_ball.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "button_book",
+      "type": "image",
+      "path": "assets/buttons/button_book.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "button_door",
+      "type": "image",
+      "path": "assets/buttons/button_door.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "title",
+      "type": "image",
+      "path": "assets/buttons/title.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "title_full",
+      "type": "image",
+      "path": "assets/buttons/title_full.png",
+      "text": "Chargement boutons"
+    },
+
+    {
+      "key": "story",
+      "type": "json",
+      "path": "assets/texts/story.json",
+      "text": "Chargement textes"
+    }
+  ]
 }

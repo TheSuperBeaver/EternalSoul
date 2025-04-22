@@ -3,6 +3,7 @@ import { Clouds } from "./Clouds";
 import { GameLights } from "./GameLights";
 import { MainCharacter } from "./MainCharacter";
 import { MapInteractions } from "./MapInteractions";
+import { MapNPCs } from "./MapNPCs";
 import { MapPosition } from "./MapPosition";
 import { MobileControls } from "./MobileControls";
 
@@ -23,6 +24,7 @@ export abstract class GameMap {
     mapInteractions: MapInteractions;
     controls: MobileControls;
     clouds: Clouds | null;
+    mapNpcs: MapNPCs;
 
     constructor(scene: ChangeMapScene, mainCharacter: MainCharacter, mobileControls: MobileControls, mapKey: string, tilesetImages: { [key: string]: string }, cloudTilemap: string | undefined, scaleValue: number = 2, characterScale: number = 2) {
         this.mainCharacter = mainCharacter;
@@ -73,6 +75,8 @@ export abstract class GameMap {
 
         this.mapInteractions = new MapInteractions(this.scene, this.map, this.mainCharacter, this.controls, this.scaleValue);
         this.mapInteractions.create();
+        this.mapNpcs = new MapNPCs(this.scene, this.map, this.mainCharacter, this.controls, this.scaleValue);
+        this.mapNpcs.create();
         this.createPositions();
     };
 

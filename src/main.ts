@@ -3,8 +3,12 @@ import { MainGame } from './scenes/MainGame';
 import { MainMenu } from './scenes/MainMenu';
 import { Preloader } from './scenes/Preloader';
 import { Story } from './scenes/Story';
-
 import { Game, Types } from "phaser";
+import TransitionImagePackPlugin from "../phaser3-rex-plugins/plugins/transitionimage-plugin";
+import UIPlugin from '../phaser3-rex-plugins/templates/ui/ui-plugin';
+import BBCodeTextPlugin from '../phaser3-rex-plugins/plugins/bbcodetext-plugin';
+import InputTextPlugin from '../phaser3-rex-plugins/plugins/inputtext-plugin';
+
 
 const config: Types.Core.GameConfig = {
     type: Phaser.WEBGL,
@@ -35,9 +39,26 @@ const config: Types.Core.GameConfig = {
         }
     },
     fullscreenTarget: 'game-container',
-
-
-
+    plugins: {
+        global: [{
+            key: 'rexInputTextPlugin',
+            plugin: InputTextPlugin,
+            start: true
+        }, {
+            key: 'rexBBCodeTextPlugin',
+            plugin: BBCodeTextPlugin,
+            start: true
+        }, {
+            key: 'rexTransitionImagePackPlugin',
+            plugin: TransitionImagePackPlugin,
+            start: true
+        }],
+        scene: [{
+            key: 'rexUI',
+            plugin: UIPlugin,
+            mapping: 'rexUI'
+        }]
+    }
 };
 
 export default new Game(config);
