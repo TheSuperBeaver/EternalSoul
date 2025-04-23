@@ -34,8 +34,8 @@ export class MainGame extends ChangeMapScene {
         this.maps['witch_hut'] = WitchHutMap;
         this.maps['witch_hut_interior'] = WitchHutInteriorMap;
         this.maps['lost_forest'] = LostForestMap;
-        //this.map = new this.maps['witch_hut_interior'](this, this.mainCharacter, this.controls);
-        this.map = new this.maps['lost_forest'](this, this.mainCharacter, this.controls);
+        this.map = new this.maps['witch_hut_interior'](this, this.mainCharacter, this.controls);
+        //this.map = new this.maps['lost_forest'](this, this.mainCharacter, this.controls);
         this.map.create();
         this.gameCamera.changeMap(this.map);
     }

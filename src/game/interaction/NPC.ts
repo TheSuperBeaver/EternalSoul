@@ -19,7 +19,16 @@ export class NPC {
         this.sprite.setDepth(20);
         this.sprite.setVisible(true);
 
-        //const glowFX = this.sprite.filters?.external.addGlow(0x181614, 0.5, 0, 2, false, 16);
+        this.sprite.enableFilters();
+        const glowFX = this.sprite.filters?.external.addGlow(0x181614, 0.5, 0, 2, false, 16);
+
+        scene.tweens.add({
+            targets: glowFX,
+            outerStrength: 4,
+            yoyo: true,
+            loop: -1,
+            ease: 'sine.inout'
+        });
 
         scene.anims.create({
             key: 'move',
@@ -50,7 +59,6 @@ export class NPC {
             });
 
         }
-        console.log("Timeline events :", timelineEvents);
         const timeline = scene.add.timeline(timelineEvents);
         timeline.play();
 
