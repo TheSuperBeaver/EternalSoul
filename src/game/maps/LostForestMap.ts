@@ -14,6 +14,7 @@ export class LostForestMap extends GameMap {
             'spring_outdoors_tileset': 'spring_outdoors_tileset',
             'treetrunk_tileset': 'treetrunk_tileset',
             'bonfire': 'bonfire',
+            'tileset-3': 'tileset-3',
         };
         super(scene, mainCharacter, mobileControls, 'lost_forest', tilesetImages, 'clouds', 2, 2);
     }

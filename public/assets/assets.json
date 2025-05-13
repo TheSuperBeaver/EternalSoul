@@ -144,6 +144,12 @@
       "text": "Chargement meubles"
     },
     {
+      "key": "tileset-3",
+      "type": "image",
+      "path": "assets/tiles/tileset-3.png",
+      "text": "Chargement décor"
+    },
+    {
       "key": "treetrunk_tileset",
       "type": "image",
       "path": "assets/tiles/treetrunk_tileset.png",
@@ -322,6 +328,12 @@
       "key": "statue",
       "type": "image",
       "path": "assets/buttons/statue.png",
+      "text": "Chargement boutons"
+    },
+    {
+      "key": "button_well",
+      "type": "image",
+      "path": "assets/buttons/button_well.png",
       "text": "Chargement boutons"
     },
     {

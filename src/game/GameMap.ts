@@ -60,7 +60,7 @@ export abstract class GameMap {
         this.map.layers.forEach(layer => {
             this.createLayer(layer);
         });
-
+        this.scene.physics.world.setBounds(0, 0, this.map.widthInPixels * this.scaleValue, this.map.heightInPixels * this.scaleValue);
         this.scene.physics.add.collider(this.mainCharacter,
             this.map.layers.filter(layer => layer.tilemapLayer &&
                 (layer.tilemapLayer.layer.properties as { name: string, value: any }[]).

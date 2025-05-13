@@ -16,13 +16,13 @@ export class Story extends Scene {
     create() {
         this.story = this.cache.json.get('story');
         this.camera = this.cameras.main;
-        this.background = this.add.image(518, 384, 'background');
+        this.background = this.add.image(750, 375, 'background');
         this.camera.on('camerafadeincomplete', () => {
-            this.grimoire = this.add.image(1024 + 200, 384, 'grimoire');
+            this.grimoire = this.add.image(1500 + 200, 375, 'grimoire');
 
             this.tweens.add({
                 targets: this.grimoire,
-                x: 518,
+                x: 750,
                 duration: 1000,
                 ease: 'Power2',
                 onComplete: () => {
@@ -69,13 +69,13 @@ export class Story extends Scene {
     }
 
     private writeIntro() {
-        this.onceupon = this.add.text(518, 330, '', {
+        this.onceupon = this.add.text(750, 330, '', {
             fontFamily: 'Alex Brush', fontSize: 64, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5, 0.5);
         this.typewriteText(this.story.onceupon, this.onceupon, () => {
-            this.intro = this.add.text(518, 330 + 100, '', {
+            this.intro = this.add.text(750, 330 + 100, '', {
                 fontFamily: 'Gabriola', fontSize: 38, color: '#ffffff',
                 stroke: '#000000', strokeThickness: 4,
                 align: 'center'
@@ -90,7 +90,7 @@ export class Story extends Scene {
         const buttonImage = this.add.image(0, 0, 'button').setAlpha(0);
         const buttonText = this.add.text(0, 0, 'Continuer', { fontFamily: 'Gabriola', fontSize: '28px', color: '#ffffff' }).setOrigin(0.5);
 
-        this.add.container(512, 650, [buttonImage, buttonText]);
+        this.add.container(750, 650, [buttonImage, buttonText]);
 
         // Fade in the button
         this.tweens.add({

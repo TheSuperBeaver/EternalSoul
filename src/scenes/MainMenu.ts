@@ -11,15 +11,15 @@ export class MainMenu extends Scene {
 
     create() {
 
-        this.add.image(512, 385, 'background').setScale(1.0, 2.0);
+        this.add.image(750, 375, 'background').setScale(2.0);
 
         const grass = this.add.layer();
 
         const trees = ['Spruce-1', 'Spruce-2', 'Spruce-3', 'Spruce-5', 'Spruce-6', 'Flower_1', 'Flower_2', 'Tree-1', 'Tree-2', 'Tree-3', 'Wood-2', 'Bush-1', 'Bush-3'];
 
         for (let i = 0; i < 64; i++) {
-            let x = Phaser.Math.Between(0, 1024);
-            let y = Phaser.Math.Between(100, 768 * 2);
+            let x = Phaser.Math.Between(0, 1500);
+            let y = Phaser.Math.Between(100, 750 * 2);
 
             let frame = Phaser.Utils.Array.GetRandom(trees);
 
@@ -41,14 +41,14 @@ export class MainMenu extends Scene {
             loop: -1
         });
 
-        const uiCamera = this.cameras.add(0, 0, 1024, 768);
+        const uiCamera = this.cameras.add(0, 0, 1500, 750);
         uiCamera.ignore(this.children.list);
-        const logo = this.add.image(512, 0, 'logo').setScrollFactor(0).setOrigin(0.5, 0).setScale(0.75);
+        const logo = this.add.image(750, 0, 'logo').setScrollFactor(0).setOrigin(0.5, 0).setScale(0.75);
 
         logo.enableFilters();
 
-        const fx1 = logo.filters.external.addGlow(0xb056ac, 5, 0, 2, false, 16);
-        const fx2 = logo.filters.external.addGlow(0xffffff, 1, 0, 2, false, 8);
+        const fx1 = logo.filters?.external.addGlow(0xb056ac, 5, 0, 2, false, 16);
+        const fx2 = logo.filters?.external.addGlow(0xffffff, 1, 0, 2, false, 8);
 
         this.tweens.add({
             targets: fx1,
