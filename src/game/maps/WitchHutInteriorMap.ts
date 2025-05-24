@@ -13,10 +13,6 @@ export class WitchHutInteriorMap extends GameMap {
             'bookshelf_tileset': 'bookshelf_tileset',
 
         };
-        super(scene, mainCharacter, mobileControls, 'witch_hut_interior', tilesetImages, '', 2, 2);
-    }
-
-    update(): void {
-        super.update();
+        super(scene, mainCharacter, mobileControls, 'witch_hut_interior', tilesetImages, [], 2, 2);
     }
 }

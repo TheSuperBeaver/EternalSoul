@@ -12,6 +12,7 @@ export class MainCharacter extends Phaser.Physics.Arcade.Sprite {
         this.setName('mainCharacter');
         this.setScale(1);
         this.setDepth(15);
+        this.setOrigin(0.5, 0.5);
 
         this.speed = speed;
         this.controls = joystick;

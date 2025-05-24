@@ -10,4 +10,8 @@ export class Clouds {
     update() {
         this.clouds.tilePositionX += 0.5;
     }
+
+    destroy() {
+        this.clouds.destroy();
+    }
 }

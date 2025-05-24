@@ -16,17 +16,17 @@ export abstract class GameMap {
     mapKey: string;
     map: Phaser.Tilemaps.Tilemap;
     tilesetImages: { [key: string]: string };
-    cloudTilemap: string | undefined;
+    cloudTilemap: string[] | undefined;
     scaleValue: number;
     characterScale: number;
     positions: { [key: string]: MapPosition } = {};
     gameLights: GameLights;
     mapInteractions: MapInteractions;
     controls: MobileControls;
-    clouds: Clouds | null;
+    clouds: Clouds[];
     mapNpcs: MapNPCs;
 
-    constructor(scene: ChangeMapScene, mainCharacter: MainCharacter, mobileControls: MobileControls, mapKey: string, tilesetImages: { [key: string]: string }, cloudTilemap: string | undefined, scaleValue: number = 2, characterScale: number = 2) {
+    constructor(scene: ChangeMapScene, mainCharacter: MainCharacter, mobileControls: MobileControls, mapKey: string, tilesetImages: { [key: string]: string }, cloudTilemap: string[] | undefined, scaleValue: number = 2, characterScale: number = 2) {
         this.mainCharacter = mainCharacter;
         this.scene = scene;
         this.controls = mobileControls;
@@ -35,6 +35,7 @@ export abstract class GameMap {
         this.scaleValue = scaleValue;
         this.cloudTilemap = cloudTilemap;
         this.characterScale = characterScale;
+        this.clouds = [];
     }
 
     destroy(): void {
@@ -42,8 +43,8 @@ export abstract class GameMap {
         this.map.destroy();
         this.scene.physics.world.colliders.destroy();
         this.positions = {};
-        this.clouds?.clouds.destroy();
-        this.clouds = null;
+        this.clouds?.forEach(cloud => cloud.destroy());
+        this.clouds = [];
         this.mapInteractions.destroy();
         this.gameLights.destroy();
     }
@@ -60,7 +61,7 @@ export abstract class GameMap {
         this.map.layers.forEach(layer => {
             this.createLayer(layer);
         });
-        this.scene.physics.world.setBounds(0, 0, this.map.widthInPixels * this.scaleValue, this.map.heightInPixels * this.scaleValue);
+        this.scene.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         this.scene.physics.add.collider(this.mainCharacter,
             this.map.layers.filter(layer => layer.tilemapLayer &&
                 (layer.tilemapLayer.layer.properties as { name: string, value: any }[]).
@@ -70,7 +71,9 @@ export abstract class GameMap {
         this.mainCharacter.setScale(this.characterScale);
 
         if (this.cloudTilemap) {
-            this.clouds = new Clouds(this.scene, this.cloudTilemap);
+            for (const cloudLayer of this.cloudTilemap) {
+                this.clouds?.push(new Clouds(this.scene, cloudLayer));
+            }
         }
 
         this.mapInteractions = new MapInteractions(this.scene, this.map, this.mainCharacter, this.controls, this.scaleValue);
@@ -80,11 +83,15 @@ export abstract class GameMap {
         this.createPositions();
     };
 
-    update(): void {
+    update(delta: number): void {
         this.mapInteractions.update();
         if (this.clouds) {
-            this.clouds.update();
+            this.clouds.forEach(cloud => cloud.update());
         }
+
+        this.mapNpcs.npcs.forEach(npc => {
+            npc.update(delta, this.mainCharacter);
+        })
     };
 
     private createLayer(layerData: Phaser.Tilemaps.LayerData) {

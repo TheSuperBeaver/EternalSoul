@@ -1,34 +1,29 @@
-import { Scene } from "phaser";
+import { MainCharacter } from "../MainCharacter";
+import { ChangeMapScene } from "../ChangeMapScene";
 
-export class NPC {
+export abstract class NPC {
     id: string;
     model: string;
     positions: Phaser.Math.Vector2[];
     moveSpeed: number;
-    sprite: Phaser.GameObjects.Sprite;
+    sprite: Phaser.Physics.Arcade.Sprite;
+    chasingPlayer = false;
+    canChasePlayer = false;
+    timeline: Phaser.Time.Timeline;
+    scene: ChangeMapScene;
 
-    constructor(scene: Scene, scaleValue: integer, id: string, model: string, moveSpeed: number, positions: Phaser.Math.Vector2[] = []) {
+    constructor(scene: ChangeMapScene, scaleValue: integer, id: string, model: string, moveSpeed: number, positions: Phaser.Math.Vector2[] = [], character: MainCharacter) {
         this.id = id;
         this.model = model;
         this.positions = positions;
         this.moveSpeed = moveSpeed;
+        this.scene = scene;
 
-        this.sprite = scene.add.sprite(this.positions[0].x, this.positions[0].y, this.model);
-        this.sprite.setOrigin(0.5, 1);
+        this.sprite = scene.physics.add.sprite(this.positions[0].x, this.positions[0].y, this.model);
+        this.sprite.setOrigin(0.5, 0.5);
         this.sprite.setScale(scaleValue);
         this.sprite.setDepth(20);
         this.sprite.setVisible(true);
-
-        this.sprite.enableFilters();
-        const glowFX = this.sprite.filters?.external.addGlow(0x181614, 0.5, 0, 2, false, 16);
-
-        scene.tweens.add({
-            targets: glowFX,
-            outerStrength: 4,
-            yoyo: true,
-            loop: -1,
-            ease: 'sine.inout'
-        });
 
         scene.anims.create({
             key: 'move',
@@ -37,9 +32,13 @@ export class NPC {
             repeat: -1
         });
 
-        const timelineEvents: Phaser.Types.Time.TimelineEventConfig[] = [];
+        this.createNewTimeline();
 
-        console.log("Positions :", this.positions);
+        scene.anims.play('move', this.sprite);
+    }
+
+    createNewTimeline() {
+        const timelineEvents: Phaser.Types.Time.TimelineEventConfig[] = [];
 
         for (let i = 1; i < this.positions.length; i++) {
             const target = this.positions[i];
@@ -57,16 +56,18 @@ export class NPC {
                     repeat: -1,
                 }
             });
-
         }
-        const timeline = scene.add.timeline(timelineEvents);
-        timeline.play();
-
-        scene.anims.play('move', this.sprite);
+        this.timeline = this.scene.add.timeline(timelineEvents);
+        this.timeline.play();
+        console.log("Timeline created for NPC", this.timeline);
     }
 
-    private calculateDuration(start: Phaser.Math.Vector2, end: Phaser.Math.Vector2): number {
+    calculateDuration(start: Phaser.Math.Vector2, end: Phaser.Math.Vector2): number {
         const distance = Phaser.Math.Distance.Between(start.x, start.y, end.x, end.y);
         return (distance / this.moveSpeed) * 1000; // Convert speed to duration in milliseconds
     }
+
+    abstract startChasing(): void;
+
+    abstract update(delta: number, player: Phaser.Physics.Arcade.Sprite): void;
 }

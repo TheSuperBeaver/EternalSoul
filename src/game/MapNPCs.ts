@@ -1,6 +1,7 @@
 import { ChangeMapScene } from "./ChangeMapScene";
 import { MainCharacter } from "./MainCharacter";
 import { MobileControls } from "./MobileControls";
+import { MonsterNPC } from "./interaction/MonsterNPC";
 import { NPC } from "./interaction/NPC";
 
 export class MapNPCs {
@@ -36,6 +37,7 @@ export class MapNPCs {
         const npc = interaction.properties.find((prop: { name: string; }) => prop.name === 'npc')?.value || '';
         const model = interaction.properties.find((prop: { name: string; }) => prop.name === 'model')?.value || '';
         const move_speed = interaction.properties.find((prop: { name: string; }) => prop.name === 'move_speed')?.value || '';
+        const isMonster = interaction.properties.find((prop: { name: string; }) => prop.name === 'monster')?.value || '';
 
         const positions: Phaser.Math.Vector2[] = [];
 
@@ -46,9 +48,12 @@ export class MapNPCs {
                 positions.push(new Phaser.Math.Vector2(relativeX * this.scaleValue, relativeY * this.scaleValue));
             });
         }
-
-        this.npcs.push(new NPC(this.scene, this.scaleValue, npc, model, move_speed, positions));
-        this.scene.gameCamera.controlsCamera.ignore(this.npcs[this.npcs.length - 1].sprite);
-        this.scene.physics.add.collider(this.character, this.npcs[this.npcs.length - 1].sprite);
+        let newNpc: NPC;
+        if (isMonster) {
+            newNpc = new MonsterNPC(this.scene, this.scaleValue, npc, model, move_speed, positions, this.character);
+            this.npcs.push(newNpc);
+            this.scene.gameCamera.controlsCamera.ignore(newNpc.sprite);
+            this.scene.physics.add.collider(this.character, newNpc.sprite);
+        }
     }
 }

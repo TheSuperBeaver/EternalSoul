@@ -22,21 +22,22 @@
   },
   "homepage": "https://github.com/phaserjs/template-parcel-ts#readme",
   "devDependencies": {
-    "@parcel/transformer-glsl": "^2.12.0",
-    "@parcel/transformer-typescript-tsc": "^2.12.0",
+    "@parcel/bundler-default": "^2.15.0",
+    "@parcel/config-default": "^2.15.0",
+    "@parcel/optimizer-terser": "^2.15.1",
+    "@parcel/transformer-babel": "^2.15.0",
+    "@parcel/transformer-glsl": "^2.15.0",
+    "@parcel/transformer-typescript-tsc": "^2.15.0",
     "express": "^4.19.2",
-    "parcel": "^2.12.0",
+    "parcel": "^2.15.0",
     "parcel-reporter-clean-dist": "^1.0.4",
     "parcel-reporter-static-files-copy": "^1.5.3",
     "process": "^0.11.10",
-    "typescript": "^5.4.5",
-    "@parcel/bundler-default": "^2.12.0",
-    "@parcel/transformer-babel": "^2.12.0",
-    "@parcel/config-default": "^2.12.0"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
     "math-intrinsics": "^1.1.0",
-    "phaser": "^4.0.0-rc.1"
+    "phaser": "^4.0.0-rc.2"
   },
   "staticFiles": {
     "staticPath": "public"

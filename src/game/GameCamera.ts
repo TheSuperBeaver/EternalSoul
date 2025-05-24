@@ -47,8 +47,8 @@ export class GameCamera {
 
         this.controlsCamera.ignore(map.map.layers.map(layer => layer.tilemapLayer));
         this.controlsCamera.ignore(this.mainCharacter);
-        if (map.clouds) {
-            this.controlsCamera.ignore(map.clouds.clouds);
-        }
+        map.clouds.forEach(cloud => {
+            this.controlsCamera.ignore(cloud.clouds);
+        });
     }
 }

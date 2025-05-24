@@ -16,10 +16,6 @@ export class LostForestMap extends GameMap {
             'bonfire': 'bonfire',
             'tileset-3': 'tileset-3',
         };
-        super(scene, mainCharacter, mobileControls, 'lost_forest', tilesetImages, 'clouds', 2, 2);
-    }
-
-    update(): void {
-        super.update();
+        super(scene, mainCharacter, mobileControls, 'lost_forest', tilesetImages, ['clouds'], 2, 2);
     }
 }
